@@ -8,6 +8,6 @@ include_directories(.)
 add_executable(Prog2_NHF
         telefonkonyv.cpp
         telefonkonyv.h
-        ugyfel.cpp
-        ugyfel.h
-        telefonkonyv-main.cpp)
+        telefonkonyv-main.cpp
+        Bejegyzes.h
+        Szemely.h Ceg.h)

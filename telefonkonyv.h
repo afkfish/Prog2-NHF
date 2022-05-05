@@ -5,16 +5,29 @@
 #ifndef PROG2_NHF_TELEFONKONYV_H
 #define PROG2_NHF_TELEFONKONYV_H
 
-#include "ugyfel.h"
+#include <string>
+#include <iostream>
+#include "Bejegyzes.h"
+#include "Szemely.h"
+#include "Ceg.h"
 
 class Telefonkonyv {
     static int maxu;
-    Ugyfel* ugyfel;
+    int size;
+    Bejegyzes *ugyfelek[0];
 public:
-    Telefonkonyv():ugyfel(new Ugyfel[maxu]) {}
+    Telefonkonyv() :size(0) {}
     ~Telefonkonyv() {
-        delete[] ugyfel;
+        if(size > 0) {
+            for(int i = 0 ; i < size; i++) {
+                delete[] ugyfelek[i];
+            }
+        }
     }
+    int get_size() const {return size;}
+    void add(std::string tipus, std::string szam, std::string cim, std::string vnev, std::string knev, std::string bnev, std::string mszam, std::string cnev, std::string cegtipus);
+    void del(std::string szam);
+    void list() const;
 };
 
 
