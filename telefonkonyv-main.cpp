@@ -10,6 +10,7 @@ int main() {
     a.add("szemely", "123", "alma", "korte", "", "barack", "1234567", "", "");
 
     a.add("ceg", "123456789", "nem", "", "", "", "", "orion", "informatika");
+    a.add("ceg", "7654321", "nem", "", "", "", "", "aloma", "informatika");
 
     std::cout<< a.get_size() <<std::endl;
 

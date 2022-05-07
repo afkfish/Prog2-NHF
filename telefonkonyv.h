@@ -20,7 +20,7 @@ public:
     ~Telefonkonyv() {
         if(size > 0) {
             for(int i = 0 ; i < size; i++) {
-                delete[] ugyfelek[i];
+                delete ugyfelek[i];
             }
         }
     }

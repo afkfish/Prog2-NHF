@@ -6,7 +6,7 @@
 #define PROG2_NHF_BEJEGYZES_H
 #include <iostream>
 #include <string>
-
+#include <stdlib.h>
 
 class Bejegyzes {
 protected:

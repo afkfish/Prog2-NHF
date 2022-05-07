@@ -26,8 +26,10 @@ void Telefonkonyv::del(std::string szam) {
     for(int i = 0; i < size; i++) {
         if(ugyfelek[i]->get_szam() != szam) {
             tmp[j] = ugyfelek[i];
-            delete ugyfelek[i];
             j++;
+        }
+        else{
+            delete ugyfelek[i];
         }
     }
     for(int i = 0; i < j; i++) {
