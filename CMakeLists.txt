@@ -12,4 +12,4 @@ add_executable(Prog2_NHF
         Bejegyzes.h
         Szemely.h Ceg.h
         memtrace.cpp
-        memtrace.h)
+        memtrace.h Bejegyzes.cpp)

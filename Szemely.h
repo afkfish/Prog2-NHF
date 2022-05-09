@@ -25,11 +25,11 @@ public:
     std::string get_knev() const {return knev;}
     std::string get_bnev() const {return bnev;}
     std::string get_mszam() const {return mszam;}
-    void print() {
-        std::cout << "Telefonszam: " << szam << "\nCim: " << cim
-        << "\nVezetek nev: " << vnev << "\nKeresztnev: " << knev
-        << "\nBecenev: " << bnev << "\nMunkahelyi szam: " << mszam
-        << std::endl;
+    void print(std::ostream& os) const {
+        std::cout << "Tipus: " << tipus << "\n\nVezetek nev: " << vnev
+        << "\nKeresztnev: " << knev << "\nBecenev: " << bnev << "\nTelefonszam: "
+        << szam << "\nCim: " << cim << "\nMunkahelyi szam: " << mszam
+        << "\n---------------" << std::endl;
     }
 };
 

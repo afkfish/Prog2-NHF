@@ -28,9 +28,10 @@ public:
     std::string get_tipus() const {return tipus;}
     std::string get_cim() const {return cim;}
 
-    virtual void print() = 0;
+    virtual void print(std::ostream& os) const = 0;
     virtual ~Bejegyzes() {}
 };
+std::ostream& operator<<(std::ostream& os, const Bejegyzes& b);
 
 
 #endif //PROG2_NHF_BEJEGYZES_H

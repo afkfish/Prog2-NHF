@@ -21,10 +21,11 @@ public:
     std::string get_cnev() const {return cnev;}
     std::string get_cegtipus() const {return cegtipus;}
 
-    void print() {
-        std::cout << "Telefonszam: " << szam << "\nCim: " << cim
-        << "\nCegnev: " << cnev << "\nCegtipus: " << cegtipus
-        << std::endl;
+    void print(std::ostream& os) const {
+        os << "Tipus: " << tipus << "\n\nCegnev: "
+        << cnev << "\nTelefonszam: " << szam << "\nCim: "
+        << cim << "\nCegtipus: " << cegtipus
+        << "\n---------------" << std::endl;
     }
 };
 

@@ -7,6 +7,7 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include "Bejegyzes.h"
 #include "Szemely.h"
 #include "Ceg.h"
@@ -28,6 +29,7 @@ public:
     void add(std::string tipus, std::string szam, std::string cim, std::string vnev, std::string knev, std::string bnev, std::string mszam, std::string cnev, std::string cegtipus);
     void del(std::string szam);
     void list() const;
+    void exp(const std::string&) const;
 };
 
 
