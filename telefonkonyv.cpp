@@ -58,6 +58,7 @@ void Telefonkonyv::list() const {
 void Telefonkonyv::exp(const std::string& f) const {
     std::ofstream file;
     file.open(f);
+    file << size << std::endl;
     for(int i = 0; i < size; i++){
         std::cout << *ugyfelek[i];
         file << *ugyfelek[i];
@@ -65,3 +66,47 @@ void Telefonkonyv::exp(const std::string& f) const {
     file.close();
 }
 
+void Telefonkonyv::imp(const std::string& f) {
+    int s;
+    std::string egyeb;
+    std::string tipus, szam, vnev, knev, cim, bnev, mszam, cnev, cegtipus;
+    std::ifstream file(f);
+    if(file) {
+        file >> s;
+        for(int i = 0; i < s; i++) {
+            file >> egyeb;
+            file >> tipus;
+            if(tipus == "szemely") {
+                file >> egyeb;
+                file >> egyeb;
+                file >> vnev;
+                file >> egyeb;
+                file >> knev;
+                file >> egyeb;
+                file >> bnev;
+                file >> egyeb;
+                file >> szam;
+                file >> egyeb;
+                file >> cim;
+                file >> egyeb;
+                file >> egyeb;
+                file >> mszam;
+                this->add(tipus, szam, cim, vnev, knev, bnev, mszam, "", "");
+            } else if(tipus == "ceg") {
+                file >> egyeb;
+                file >> cnev;
+                file >> egyeb;
+                file >> szam;
+                file >> egyeb;
+                file >> cim;
+                file >> egyeb;
+                file >> cegtipus;
+                this->add(tipus, szam, cim, "", "", "", "", cnev, cegtipus);
+            } else {
+                throw std::invalid_argument("");
+            }
+            file >> egyeb;
+        }
+    }
+    file.close();
+}

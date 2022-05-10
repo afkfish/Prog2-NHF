@@ -30,6 +30,7 @@ public:
     void del(std::string szam);
     void list() const;
     void exp(const std::string&) const;
+    void imp(const std::string&);
 };
 
 

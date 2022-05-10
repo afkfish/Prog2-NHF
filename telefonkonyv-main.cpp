@@ -20,7 +20,8 @@ int main() {
                   << "2 -> Bejegyzes torlese" << std::endl
                   << "3 -> Bejegyzesek listazasa" << std::endl
                   << "4 -> Kereses a bejegyzesek kozott" << std::endl
-                  << "5 -> Bejegyzesek exportalasa\033[0m\n" << std::endl;
+                  << "5 -> Bejegyzesek exportalasa" << std::endl
+                  << "6 -> Bejegyzesek importalasa\033[0m\n" << std::endl;
 
         std::cin >> command;
         switch (command) {
@@ -88,6 +89,17 @@ int main() {
                 std::cout << "Export file neve:" << std::endl;
                 std::getline(std::cin, fi);
                 telefonkonyv.exp(fi+".txt");
+                break;
+            case 6:
+                std::cout << "Bejegyzesek importalasa:\n" << std::endl;
+                std::getline(std::cin, fi);
+                std::cout << "Import file neve:" << std::endl;
+                std::getline(std::cin, fi);
+                try {
+                    telefonkonyv.imp(fi+".txt");
+                } catch(std::invalid_argument) {
+                    std::cout << "\n\033[0;31mHibas az input fajl!\033[0m" << std::endl;
+                }
                 break;
             default:
                 std::cout << "\033[0;31mKilepes.\033[0m" << std::endl;
