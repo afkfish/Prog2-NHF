@@ -120,13 +120,13 @@ int main() {
     TEST(ADD, SZEMELY)
         t.add("szemely", "123", "cim", "vnev", "knev", "bnev", "mszam", "", "");
         EXPECT_EQ(1, t.get_size());
-        EXPECT_EQ("123", t.get_ugyfelek()[0]->get_szam());
+        EXPECT_STREQ("123", t.get_ugyfelek()[0]->get_szam().c_str());
     END
 
     TEST(ADD, CEG)
         t.add("ceg", "123", "cim", "", "", "", "", "cnev", "cegtipus");
         EXPECT_EQ(2, t.get_size());
-        EXPECT_EQ("cim", t.get_ugyfelek()[1]->get_cim());
+        EXPECT_STREQ("cim", t.get_ugyfelek()[1]->get_cim().c_str());
     END
 
     TEST(DEL, TEST)
