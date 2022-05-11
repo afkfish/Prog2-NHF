@@ -11,6 +11,7 @@
 #include "Bejegyzes.h"
 #include "Szemely.h"
 #include "Ceg.h"
+#include "memtrace.h"
 
 class Telefonkonyv {
     static int maxu;
@@ -31,6 +32,8 @@ public:
     void list() const;
     void exp(const std::string&) const;
     void imp(const std::string&);
+    Bejegyzes** get_ugyfelek() {return this->ugyfelek;}
+    void keres(std::string& sza) const;
 };
 
 

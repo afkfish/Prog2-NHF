@@ -3,6 +3,7 @@
 //
 #include "telefonkonyv.h"
 #include <string>
+#include "gtest_lite.h"
 
 int Telefonkonyv::maxu = 10;
 
@@ -82,6 +83,14 @@ int main() {
                 break;
             case 4:
                 std::cout << "Kereses a bejegyzesek kozott:\n" << std::endl;
+                std::getline(std::cin,szam);
+                std::cout << "Keresendo szam:" << std::endl;
+                std::getline(std::cin, szam);
+                try{
+                    telefonkonyv.keres(szam);
+                } catch(std::out_of_range) {
+                    std::cout << "\n\033[0;31mNem volt a szamnak megfelelo bejegyzes!\033[0m" << std::endl;
+                }
                 break;
             case 5:
                 std::cout << "Bejegyzesek exportalasa:\n" << std::endl;
@@ -107,4 +116,23 @@ int main() {
                 break;
         }
     }
+    Telefonkonyv t;
+    TEST(ADD, SZEMELY)
+        t.add("szemely", "123", "cim", "vnev", "knev", "bnev", "mszam", "", "");
+        EXPECT_EQ(1, t.get_size());
+        EXPECT_EQ("123", t.get_ugyfelek()[0]->get_szam());
+    END
+
+    TEST(ADD, CEG)
+        t.add("ceg", "123", "cim", "", "", "", "", "cnev", "cegtipus");
+        EXPECT_EQ(2, t.get_size());
+        EXPECT_EQ("cim", t.get_ugyfelek()[1]->get_cim());
+    END
+
+    TEST(DEL, TEST)
+        t.del("123");
+        EXPECT_EQ(1, t.get_size());
+        t.del("123");
+        EXPECT_EQ(0, t.get_size());
+    END
 }

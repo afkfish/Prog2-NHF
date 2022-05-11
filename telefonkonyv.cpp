@@ -60,7 +60,7 @@ void Telefonkonyv::exp(const std::string& f) const {
     file.open(f);
     file << size << std::endl;
     for(int i = 0; i < size; i++){
-        std::cout << *ugyfelek[i];
+        //std::cout << *ugyfelek[i];
         file << *ugyfelek[i];
     }
     file.close();
@@ -109,4 +109,19 @@ void Telefonkonyv::imp(const std::string& f) {
         }
     }
     file.close();
+}
+
+void Telefonkonyv::keres(std::string& sza) const {
+    int j = 0;
+    for(int i = 0; i < size; i++){
+        if(ugyfelek[i]->get_szam() == sza){
+            ugyfelek[i]->print(std::cout);
+            j++;
+        }
+    }
+    if (j == 0) {
+        throw std::out_of_range("");
+    } else {
+        std::cout << j << " db ugyfel letezik ezzel a szammal." << std::endl;
+    }
 }
