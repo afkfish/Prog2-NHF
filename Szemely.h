@@ -21,11 +21,12 @@ public:
         this->bnev = bnev;
         this->mszam = mszam;
     }
+    std::string get_n() const override {return vnev + " " + knev;}
     std::string get_vnev() const {return vnev;}
     std::string get_knev() const {return knev;}
     std::string get_bnev() const {return bnev;}
     std::string get_mszam() const {return mszam;}
-    void print(std::ostream& os) const {
+    void print(std::ostream& os) const override {
         os << "Tipus: " << tipus << "\n\nVezetek nev: " << vnev
         << "\nKeresztnev: " << knev << "\nBecenev: " << bnev << "\nTelefonszam: "
         << szam << "\nCim: " << cim << "\nMunkahelyi szam: " << mszam

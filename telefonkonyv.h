@@ -14,7 +14,6 @@
 #include "memtrace.h"
 
 class Telefonkonyv {
-    static int maxu;
     int size;
     Bejegyzes *ugyfelek[0];
 public:
@@ -28,12 +27,13 @@ public:
     }
     int get_size() const {return size;}
     void add(std::string tipus, std::string szam, std::string cim, std::string vnev, std::string knev, std::string bnev, std::string mszam, std::string cnev, std::string cegtipus);
-    void del(std::string szam);
+    void del(std::string& szam);
     void list() const;
     void exp(const std::string&) const;
     void imp(const std::string&);
     Bejegyzes** get_ugyfelek() {return this->ugyfelek;}
     void keres(std::string& sza) const;
+    void keresn(std::string& nev) const;
 };
 
 

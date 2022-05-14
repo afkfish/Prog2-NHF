@@ -5,7 +5,6 @@
 #include <string>
 #include "gtest_lite.h"
 
-int Telefonkonyv::maxu = 10;
 
 int main() {
     Telefonkonyv telefonkonyv;
@@ -13,7 +12,7 @@ int main() {
     while(a) {
         int command = 0;
         int ch = 9;
-        std::string szam, vnev, knev, cim, bnev, mszam, cnev, cegtipus;
+        std::string szam, nev, vnev, knev, cim, bnev, mszam, cnev, cegtipus;
         std::string fi;
         std::cout << "\n"
                   << "\033[0;32m0 -> Kilepes" << std::endl
@@ -73,7 +72,7 @@ int main() {
                 std::getline(std::cin, szam);
                 try{
                     telefonkonyv.del(szam);
-                } catch(std::out_of_range) {
+                } catch(std::out_of_range&) {
                     std::cout << "\n\033[0;31mNem volt a szamnak megfelelo bejegyzes!\033[0m" << std::endl;
                 }
                 break;
@@ -83,13 +82,30 @@ int main() {
                 break;
             case 4:
                 std::cout << "Kereses a bejegyzesek kozott:\n" << std::endl;
-                std::getline(std::cin,szam);
-                std::cout << "Keresendo szam:" << std::endl;
-                std::getline(std::cin, szam);
-                try{
-                    telefonkonyv.keres(szam);
-                } catch(std::out_of_range) {
-                    std::cout << "\n\033[0;31mNem volt a szamnak megfelelo bejegyzes!\033[0m" << std::endl;
+                std::cout
+                        << "0 -> Telefonszam alapjan" << std::endl
+                        << "1 -> Nev alapjan" << std::endl;
+                std::cin >> ch;
+                if(ch == 0) {
+                    std::getline(std::cin,szam);
+                    std::cout << "Keresendo szam:" << std::endl;
+                    std::getline(std::cin, szam);
+                    try{
+                        telefonkonyv.keres(szam);
+                    } catch(std::out_of_range&) {
+                        std::cout << "\n\033[0;31mNem volt a szamnak megfelelo bejegyzes!\033[0m" << std::endl;
+                    }
+                } else if (ch == 1) {
+                    std::getline(std::cin,nev);
+                    std::cout << "Keresendo nev:" << std::endl;
+                    std::getline(std::cin, nev);
+                    try{
+                        telefonkonyv.keresn(nev);
+                    } catch(std::out_of_range&) {
+                        std::cout << "\n\033[0;31mNem volt a nevnek megfelelo bejegyzes!\033[0m" << std::endl;
+                    }
+                } else {
+                    std::cout << "\n\033[0;31mA keresesi opcio nem letezik!\033[0m" << std::endl;
                 }
                 break;
             case 5:
@@ -106,7 +122,7 @@ int main() {
                 std::getline(std::cin, fi);
                 try {
                     telefonkonyv.imp(fi+".txt");
-                } catch(std::invalid_argument) {
+                } catch(std::invalid_argument&) {
                     std::cout << "\n\033[0;31mHibas az input fajl!\033[0m" << std::endl;
                 }
                 break;

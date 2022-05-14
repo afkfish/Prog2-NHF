@@ -18,10 +18,11 @@ public:
         this->cnev = cnev;
         this->cegtipus = cegtipus;
     }
+    std::string get_n() const override {return cnev;}
     std::string get_cnev() const {return cnev;}
     std::string get_cegtipus() const {return cegtipus;}
 
-    void print(std::ostream& os) const {
+    void print(std::ostream& os) const override {
         os << "Tipus: " << tipus << "\n\nCegnev: "
         << cnev << "\nTelefonszam: " << szam << "\nCim: "
         << cim << "\nCegtipus: " << cegtipus

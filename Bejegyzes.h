@@ -29,7 +29,8 @@ public:
     std::string get_cim() const {return cim;}
 
     virtual void print(std::ostream& os) const = 0;
-    virtual ~Bejegyzes() {}
+    virtual std::string get_n() const = 0;
+    virtual ~Bejegyzes() = default;
 };
 std::ostream& operator<<(std::ostream& os, const Bejegyzes& b);
 

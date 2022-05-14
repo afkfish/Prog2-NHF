@@ -5,19 +5,23 @@
 #include "telefonkonyv.h"
 
 void Telefonkonyv::add(std::string tipus, std::string szam, std::string cim, std::string vnev, std::string knev, std::string bnev, std::string mszam, std::string cnev, std::string cegtipus) {
-    if(size < maxu){
-        if(tipus == "szemely") {
+    if(tipus == "szemely") {
+        try{
             ugyfelek[size] = new Szemely(szam, cim, vnev, knev, bnev, mszam);
-        } else if(tipus == "ceg") {
-            ugyfelek[size] = new Ceg(szam, cim, cnev, cegtipus);
+        } catch(std::bad_alloc&){
+            std::cout << "\033[0;31mHiba tortent a bejegyzes felvetelekor\033[0m" << std::endl;
         }
-        size++;
-    } else {
-        std::cout << "A telefonkonyv megtelt!" << std::endl;
+    } else if(tipus == "ceg") {
+        try {
+            ugyfelek[size] = new Ceg(szam, cim, cnev, cegtipus);
+        } catch (std::bad_alloc&) {
+            std::cout << "\033[0;31mHiba tortent a bejegyzes felvetelekor\033[0m" << std::endl;
+        }
     }
+    size++;
 }
 
-void Telefonkonyv::del(std::string szam) {
+void Telefonkonyv::del(std::string& szam) {
     if(size > 0) {
         Bejegyzes *tmp[size-1];
         int j = 0;
@@ -58,10 +62,11 @@ void Telefonkonyv::list() const {
 void Telefonkonyv::exp(const std::string& f) const {
     std::ofstream file;
     file.open(f);
-    file << size << std::endl;
-    for(int i = 0; i < size; i++){
-        //std::cout << *ugyfelek[i];
-        file << *ugyfelek[i];
+    if(file){
+        file << size << std::endl;
+        for(int i = 0; i < size; i++){
+            file << *ugyfelek[i];
+        }
     }
     file.close();
 }
@@ -114,7 +119,22 @@ void Telefonkonyv::imp(const std::string& f) {
 void Telefonkonyv::keres(std::string& sza) const {
     int j = 0;
     for(int i = 0; i < size; i++){
-        if(ugyfelek[i]->get_szam() == sza){
+        if(ugyfelek[i]->get_szam().find(sza) != std::string::npos){
+            ugyfelek[i]->print(std::cout);
+            j++;
+        }
+    }
+    if (j == 0) {
+        throw std::out_of_range("");
+    } else {
+        std::cout << j << " db ugyfel letezik ezzel a szammal." << std::endl;
+    }
+}
+
+void Telefonkonyv::keresn(std::string &nev) const {
+    int j = 0;
+    for(int i = 0; i < size; i++) {
+        if(ugyfelek[i]->get_n().find(nev) != std::string::npos) {
             ugyfelek[i]->print(std::cout);
             j++;
         }
