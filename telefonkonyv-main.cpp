@@ -5,10 +5,13 @@
 #include <string>
 #include "gtest_lite.h"
 
-
+/**
+ * fo program ami egy menut tartalmaz
+ */
 int main() {
     Telefonkonyv telefonkonyv;
     bool a = true;
+     // menu
     while(a) {
         int command = 0;
         int ch = 9;
@@ -25,13 +28,13 @@ int main() {
 
         std::cin >> command;
         switch (command) {
-            case 1:
+            case 1: //bejegyzes felvetele
                 std::cout << "Bejegyzes hozzaadasa:\n" << std::endl;
                 std::cout
                         << "0 -> Szemely" << std::endl
                         << "1 -> Ceg" << std::endl;
-                std::cin >> ch;
-                if (ch == 0) {
+                std::cin >> ch; // opcio kerdezese
+                if (ch == 0) { // szemely
                     std::cout << "Szemely felvetele:\n" << std::endl;
                     std::getline(std::cin,szam);
                     std::cout << "Telefonszama:" << std::endl;
@@ -48,7 +51,7 @@ int main() {
                     std::getline(std::cin, mszam);
                     telefonkonyv.add("szemely", szam, cim, vnev, knev, bnev, mszam, "", "");
                     std::cout << "\033[0;33mSzemely sikeresen felveve!\033[0m" << std::endl;
-                } else if(ch == 1) {
+                } else if(ch == 1) { // ceg
                     std::cout << "Ceg felvetele:\n" << std::endl;
                     std::getline(std::cin,szam);
                     std::cout << "Telefonszama:" << std::endl;
@@ -61,78 +64,78 @@ int main() {
                     std::getline(std::cin, cim);
                     telefonkonyv.add("ceg", szam, cim, "", "", "", "", cnev, cegtipus);
                     std::cout << "\033[0;33mCeg sikeresen felveve!\033[0m" << std::endl;
-                } else {
+                } else { // hiba mert nem letezo opciot irt be
                     std::cout << "\n\033[0;31mNem elfogadott bejegyzes tipus felvetele nem lehetseges!\033[0m" << std::endl;
                 }
                 break;
-            case 2:
+            case 2: // torles
                 std::cout << "Bejegyzes torlese:\n" << std::endl;
                 std::getline(std::cin,szam);
                 std::cout << "Torlendo szam:" << std::endl;
                 std::getline(std::cin, szam);
-                try{
+                try{ // megprobal torolni
                     telefonkonyv.del(szam);
-                } catch(std::out_of_range&) {
+                } catch(std::out_of_range&) { // ha nincs torlendo akkor hibat ir ki
                     std::cout << "\n\033[0;31mNem volt a szamnak megfelelo bejegyzes!\033[0m" << std::endl;
                 }
                 break;
-            case 3:
+            case 3: // kiiras
                 std::cout << "Bejegyzesek listazasa:\n" << std::endl;
                 telefonkonyv.list();
                 break;
-            case 4:
+            case 4: // kereses
                 std::cout << "Kereses a bejegyzesek kozott:\n" << std::endl;
                 std::cout
                         << "0 -> Telefonszam alapjan" << std::endl
                         << "1 -> Nev alapjan" << std::endl;
-                std::cin >> ch;
-                if(ch == 0) {
+                std::cin >> ch; // opcio kerdezese
+                if(ch == 0) { // szam alapjan
                     std::getline(std::cin,szam);
                     std::cout << "Keresendo szam:" << std::endl;
                     std::getline(std::cin, szam);
-                    try{
+                    try{ // megprobal keresni szam alapjan
                         telefonkonyv.keres(szam);
-                    } catch(std::out_of_range&) {
+                    } catch(std::out_of_range&) { // hibat dob ha nem talat semmit
                         std::cout << "\n\033[0;31mNem volt a szamnak megfelelo bejegyzes!\033[0m" << std::endl;
                     }
-                } else if (ch == 1) {
+                } else if (ch == 1) { // nev alapjan
                     std::getline(std::cin,nev);
                     std::cout << "Keresendo nev:" << std::endl;
                     std::getline(std::cin, nev);
-                    try{
+                    try{ // megprobal keresni nev alapjan
                         telefonkonyv.keresn(nev);
-                    } catch(std::out_of_range&) {
+                    } catch(std::out_of_range&) { // hibat dob ha nem talql semmit
                         std::cout << "\n\033[0;31mNem volt a nevnek megfelelo bejegyzes!\033[0m" << std::endl;
                     }
-                } else {
+                } else { // hibat dob ha nemletezo keresesi opciot ir be
                     std::cout << "\n\033[0;31mA keresesi opcio nem letezik!\033[0m" << std::endl;
                 }
                 break;
-            case 5:
+            case 5: // export
                 std::cout << "Bejegyzesek exportalasa:\n" << std::endl;
                 std::getline(std::cin, fi);
                 std::cout << "Export file neve:" << std::endl;
                 std::getline(std::cin, fi);
                 telefonkonyv.exp(fi+".txt");
                 break;
-            case 6:
+            case 6: // import
                 std::cout << "Bejegyzesek importalasa:\n" << std::endl;
                 std::getline(std::cin, fi);
                 std::cout << "Import file neve:" << std::endl;
                 std::getline(std::cin, fi);
                 try {
-                    telefonkonyv.imp(fi+".txt");
-                } catch(std::invalid_argument&) {
+                    telefonkonyv.imp(fi+".txt"); // megprobal importalni
+                } catch(std::invalid_argument&) { // hibat dob ha hibas a fajl
                     std::cout << "\n\033[0;31mHibas az input fajl!\033[0m" << std::endl;
                 }
                 break;
-            default:
+            default: // kilepes
                 std::cout << "\033[0;31mKilepes.\033[0m" << std::endl;
                 a = false;
                 break;
         }
     }
-    Telefonkonyv t;
+    Telefonkonyv t; // tesztek
     TEST(ADD, SZEMELY)
         t.add("szemely", "123", "cim", "vnev", "knev", "bnev", "mszam", "", "");
         EXPECT_EQ(1, t.get_size());

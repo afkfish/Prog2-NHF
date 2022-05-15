@@ -4,6 +4,18 @@
 
 #include "telefonkonyv.h"
 
+/**
+ * uj bejegyzes felvetele a telefonkonyvbe
+ * @param tipus
+ * @param szam
+ * @param cim
+ * @param vnev
+ * @param knev
+ * @param bnev
+ * @param mszam
+ * @param cnev
+ * @param cegtipus
+ */
 void Telefonkonyv::add(std::string tipus, std::string szam, std::string cim, std::string vnev, std::string knev, std::string bnev, std::string mszam, std::string cnev, std::string cegtipus) {
     if(tipus == "szemely") {
         try{
@@ -20,8 +32,11 @@ void Telefonkonyv::add(std::string tipus, std::string szam, std::string cim, std
     }
     size++;
 }
-
-void Telefonkonyv::del(std::string& szam) {
+/**
+ * torles a telefonkonyvbol szam alapjan
+ * @param szam
+ */
+void Telefonkonyv::del(std::string szam) {
     if(size > 0) {
         Bejegyzes *tmp[size-1];
         int j = 0;
@@ -47,7 +62,9 @@ void Telefonkonyv::del(std::string& szam) {
         throw std::out_of_range("");
     }
 }
-
+/**
+ * a bejegyzesek listazasa
+ */
 void Telefonkonyv::list() const {
     if(size > 0) {
         for(int i = 0; i < size; i++){
@@ -58,7 +75,10 @@ void Telefonkonyv::list() const {
         std::cout << "A telefonkonyv ures!" << std::endl;
     }
 }
-
+/**
+ * f filenev alapjan exportalja az adatokat
+ * @param f
+ */
 void Telefonkonyv::exp(const std::string& f) const {
     std::ofstream file;
     file.open(f);
@@ -70,7 +90,10 @@ void Telefonkonyv::exp(const std::string& f) const {
     }
     file.close();
 }
-
+/**
+ * f filenev alapjan importalja az adatokat ha a fajl helyesen formazott
+ * @param f
+ */
 void Telefonkonyv::imp(const std::string& f) {
     int s;
     std::string egyeb;
@@ -115,7 +138,10 @@ void Telefonkonyv::imp(const std::string& f) {
     }
     file.close();
 }
-
+/**
+ * kereso fuggveny a telefonszamra
+ * @param sza
+ */
 void Telefonkonyv::keres(std::string& sza) const {
     int j = 0;
     for(int i = 0; i < size; i++){
@@ -130,7 +156,10 @@ void Telefonkonyv::keres(std::string& sza) const {
         std::cout << j << " db ugyfel letezik ezzel a szammal." << std::endl;
     }
 }
-
+/**
+ * kereso fuggveny a nevre
+ * @param nev
+ */
 void Telefonkonyv::keresn(std::string &nev) const {
     int j = 0;
     for(int i = 0; i < size; i++) {
