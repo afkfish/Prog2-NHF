@@ -17,20 +17,34 @@
  * @param cegtipus
  */
 void Telefonkonyv::add(std::string tipus, std::string szam, std::string cim, std::string vnev, std::string knev, std::string bnev, std::string mszam, std::string cnev, std::string cegtipus) {
+    Bejegyzes **temp = new Bejegyzes*[size+1];
     if(tipus == "szemely") {
         try{
-            ugyfelek[size] = new Szemely(szam, cim, vnev, knev, bnev, mszam);
+            if(size>0){
+                for(int i = 0; i < size; i++){
+                    temp[i] = ugyfelek[i];
+                }
+                delete[] ugyfelek;
+            }
+            ugyfelek = temp;
+            ugyfelek[size++] = new Szemely(szam, cim, vnev, knev, bnev, mszam);
         } catch(std::bad_alloc&){
             std::cout << "\033[0;31mHiba tortent a bejegyzes felvetelekor\033[0m" << std::endl;
         }
     } else if(tipus == "ceg") {
         try {
-            ugyfelek[size] = new Ceg(szam, cim, cnev, cegtipus);
+            if(size>0) {
+                for (int i = 0; i < size; i++) {
+                    temp[i] = ugyfelek[i];
+                }
+            }
+            delete[] ugyfelek;
+            ugyfelek = temp;
+            ugyfelek[size++] = new Ceg(szam, cim, cnev, cegtipus);
         } catch (std::bad_alloc&) {
             std::cout << "\033[0;31mHiba tortent a bejegyzes felvetelekor\033[0m" << std::endl;
         }
     }
-    size++;
 }
 /**
  * torles a telefonkonyvbol szam alapjan
@@ -38,24 +52,29 @@ void Telefonkonyv::add(std::string tipus, std::string szam, std::string cim, std
  */
 void Telefonkonyv::del(std::string szam) {
     if(size > 0) {
-        Bejegyzes *tmp[size-1];
+        Bejegyzes **temp = new Bejegyzes*[size - 1];
         int j = 0;
         bool found = false;
         for(int i = 0; i < size; i++) {
             if(ugyfelek[i]->get_szam() != szam or found) {
-                tmp[j] = ugyfelek[i];
+                temp[j] = ugyfelek[i];
                 j++;
             } else {
                 found = true;
                 delete ugyfelek[i];
             }
         }
-        for(int i = 0; i < j; i++) {
-            ugyfelek[i] = tmp[i];
-        }
         if(!found) {
+            if(size > 0) {
+                for(int i = 0 ; i < size; i++) {
+                    delete temp[i];
+                }
+                delete[] temp;
+            }
             throw std::out_of_range("");
         } else {
+            delete[] ugyfelek;
+            ugyfelek = temp;
             size--;
         }
     } else {

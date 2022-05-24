@@ -18,7 +18,7 @@
  */
 class Telefonkonyv {
     int size; // meret
-    Bejegyzes *ugyfelek[0]; // bejegyzes lista
+    Bejegyzes **ugyfelek; // bejegyzes lista
 public:
     Telefonkonyv() :size(0) {} // default konstruktor letrehoz egy ures telefonkonyvet
     ~Telefonkonyv() { // destruktor felszabaditja a bejegyzeseket ha lett lefoglalva
@@ -26,6 +26,7 @@ public:
             for(int i = 0 ; i < size; i++) {
                 delete ugyfelek[i];
             }
+            delete[] ugyfelek;
         }
     }
     /**
