@@ -11,7 +11,7 @@
 #include "Bejegyzes.h"
 #include "Szemely.h"
 #include "Ceg.h"
-#include "memtrace.h"
+
 
 /**
  * telefonkonyv osztaj a bejegyzesek tarolasara szolgal
@@ -20,14 +20,12 @@ class Telefonkonyv {
     int size; // meret
     Bejegyzes **ugyfelek; // bejegyzes lista
 public:
-    Telefonkonyv() :size(0) {} // default konstruktor letrehoz egy ures telefonkonyvet
+    Telefonkonyv() :size(0), ugyfelek(NULL) {} // default konstruktor letrehoz egy ures telefonkonyvet
     ~Telefonkonyv() { // destruktor felszabaditja a bejegyzeseket ha lett lefoglalva
-        if(size > 0) {
-            for(int i = 0 ; i < size; i++) {
-                delete ugyfelek[i];
-            }
-            delete[] ugyfelek;
+        for(int i = 0 ; i < size; i++) {
+            delete ugyfelek[i];
         }
+        delete[] ugyfelek;
     }
     /**
      * telefonkonyv meret lekerdezes

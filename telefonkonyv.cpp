@@ -20,12 +20,10 @@ void Telefonkonyv::add(std::string tipus, std::string szam, std::string cim, std
     Bejegyzes **temp = new Bejegyzes*[size+1];
     if(tipus == "szemely") {
         try{
-            if(size>0){
-                for(int i = 0; i < size; i++){
-                    temp[i] = ugyfelek[i];
-                }
-                delete[] ugyfelek;
+            for(int i = 0; i < size; i++){
+                temp[i] = ugyfelek[i];
             }
+            delete[] ugyfelek;
             ugyfelek = temp;
             ugyfelek[size++] = new Szemely(szam, cim, vnev, knev, bnev, mszam);
         } catch(std::bad_alloc&){
@@ -33,10 +31,8 @@ void Telefonkonyv::add(std::string tipus, std::string szam, std::string cim, std
         }
     } else if(tipus == "ceg") {
         try {
-            if(size>0) {
-                for (int i = 0; i < size; i++) {
-                    temp[i] = ugyfelek[i];
-                }
+            for (int i = 0; i < size; i++) {
+                temp[i] = ugyfelek[i];
             }
             delete[] ugyfelek;
             ugyfelek = temp;
@@ -52,27 +48,30 @@ void Telefonkonyv::add(std::string tipus, std::string szam, std::string cim, std
  */
 void Telefonkonyv::del(std::string szam) {
     if(size > 0) {
-        Bejegyzes **temp = new Bejegyzes*[size - 1];
         int j = 0;
         bool found = false;
         for(int i = 0; i < size; i++) {
             if(ugyfelek[i]->get_szam() != szam or found) {
-                temp[j] = ugyfelek[i];
-                j++;
+                continue;
             } else {
                 found = true;
-                delete ugyfelek[i];
             }
         }
-        if(!found) {
-            if(size > 0) {
-                for(int i = 0 ; i < size; i++) {
-                    delete temp[i];
-                }
-                delete[] temp;
-            }
+        if(!found){
             throw std::out_of_range("");
-        } else {
+        }
+        else{
+            found = false;
+            Bejegyzes **temp = new Bejegyzes*[size - 1];
+            for(int i = 0; i < size; i++) {
+                if(ugyfelek[i]->get_szam() != szam or found) {
+                    temp[j] = ugyfelek[i];
+                    j++;
+                } else {
+                    found = true;
+                    delete ugyfelek[i];
+                }
+            }
             delete[] ugyfelek;
             ugyfelek = temp;
             size--;
