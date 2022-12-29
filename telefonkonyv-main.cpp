@@ -1,9 +1,6 @@
-//
-// Created by Kis Beni on 2022. 04. 08..
-//
-#include "telefonkonyv.h"
+#include "structures/telefonkonyv.h"
 #include <string>
-#include "gtest_lite.h"
+#include "lib/gtest_lite.h"
 
 /**
  * fo program ami egy menut tartalmaz
@@ -135,7 +132,8 @@ int main() {
                 break;
         }
     }
-    Telefonkonyv t; // tesztek
+    // tesztek
+    Telefonkonyv t;
     TEST(ADD, SZEMELY)
         t.add("szemely", "123", "cim", "vnev", "knev", "bnev", "mszam", "", "");
         EXPECT_EQ(1, t.get_size());

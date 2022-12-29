@@ -1,7 +1,3 @@
-//
-// Created by Kis Beni on 2022. 04. 08..
-//
-
 #ifndef PROG2_NHF_TELEFONKONYV_H
 #define PROG2_NHF_TELEFONKONYV_H
 
@@ -11,7 +7,7 @@
 #include "Bejegyzes.h"
 #include "Szemely.h"
 #include "Ceg.h"
-#include "memtrace.h"
+#include "lib/memtrace.h"
 
 /**
  * telefonkonyv osztaj a bejegyzesek tarolasara szolgal

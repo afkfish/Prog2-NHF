@@ -6,11 +6,11 @@ set(CMAKE_CXX_STANDARD 11)
 include_directories(.)
 add_definitions(-DMEMTRACE)
 add_executable(Prog2_NHF
-        telefonkonyv.cpp
-        telefonkonyv.h
+        structures/telefonkonyv.cpp
+        structures/telefonkonyv.h
         telefonkonyv-main.cpp
-        Bejegyzes.h
-        Szemely.h Ceg.h
-        memtrace.cpp
-        memtrace.h Bejegyzes.cpp
-        gtest_lite.h)
+        structures/Bejegyzes.h
+        structures/Szemely.h structures/Ceg.h
+        lib/memtrace.cpp
+        lib/memtrace.h structures/Bejegyzes.cpp
+        lib/gtest_lite.h)

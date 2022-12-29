@@ -1,6 +1,3 @@
-//
-// Created by Kis Beni on 2022. 05. 09..
-//
 #include "Bejegyzes.h"
 
 /**

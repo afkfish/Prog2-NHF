@@ -1,7 +1,3 @@
-//
-// Created by Kis Beni on 2022. 05. 01..
-//
-
 #ifndef PROG2_NHF_BEJEGYZES_H
 #define PROG2_NHF_BEJEGYZES_H
 #include <iostream>
